@@ -1,0 +1,50 @@
+{
+  "id": "march-2012",
+  "name": "Big Flare March",
+  "startDate": "2012-03-01",
+  "endDate": "2012-03-28",
+  "threshold": "X",
+  "fetchedAt": "2026-11-14T07:46:51.150Z",
+  "flares": [
+    {
+      "flrID": "2012-03-05T03:30:00-FLR-001",
+      "peakTime": "2012-03-05T04:05Z",
+      "classType": "X1.1"
+    },
+    {
+      "flrID": "2012-03-07T00:00:00-FLR-001",
+      "peakTime": "2012-03-07T00:24Z",
+      "classType": "X5.4"
+    },
+    {
+      "flrID": "2012-03-07T01:05:00-FLR-001",
+      "peakTime": "2012-03-07T01:14Z",
+      "classType": "X1.3"
+    },
+    {
+      "flrID": "2012-03-09T03:22:00-FLR-001",
+      "peakTime": "2012-03-09T03:53Z",
+      "classType": "M6.3"
+    },
+    {
+      "flrID": "2012-03-10T14:43:00-FLR-001",
+      "peakTime": "2012-03-10T15:52Z",
+      "classType": "C8.0"
+    },
+    {
+      "flrID": "2012-03-10T17:15:00-FLR-001",
+      "peakTime": "2012-03-10T17:27Z",
+      "classType": "M5.4"
+    },
+    {
+      "flrID": "2012-03-10T17:32:00-FLR-001",
+      "peakTime": "2012-03-10T17:44Z",
+      "classType": "M8.4"
+    },
+    {
+      "flrID": "2012-03-13T16:21:00-FLR-001",
+      "peakTime": "2012-03-13T17:41Z",
+      "classType": "M7.9"
+    }
+  ]
+}

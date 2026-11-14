@@ -1,0 +1,215 @@
+{
+  "id": "storm-2017",
+  "name": "Storm Month",
+  "startDate": "2017-09-01",
+  "endDate": "2017-09-28",
+  "threshold": "X",
+  "fetchedAt": "2026-11-14T07:46:34.686Z",
+  "flares": [
+    {
+      "flrID": "2017-09-02T15:23:00-FLR-001",
+      "peakTime": "2017-09-02T15:41Z",
+      "classType": "C7.7"
+    },
+    {
+      "flrID": "2017-09-04T05:36:00-FLR-001",
+      "peakTime": "2017-09-04T05:49Z",
+      "classType": "M1.2"
+    },
+    {
+      "flrID": "2017-09-04T15:11:00-FLR-001",
+      "peakTime": "2017-09-04T15:30Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2017-09-04T18:05:00-FLR-001",
+      "peakTime": "2017-09-04T18:22Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2017-09-04T18:46:00-FLR-001",
+      "peakTime": "2017-09-04T19:37Z",
+      "classType": "M1.7"
+    },
+    {
+      "flrID": "2017-09-04T19:59:00-FLR-001",
+      "peakTime": "2017-09-04T20:02Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2017-09-04T20:15:00-FLR-001",
+      "peakTime": "2017-09-04T20:33Z",
+      "classType": "M5.5"
+    },
+    {
+      "flrID": "2017-09-04T22:10:00-FLR-001",
+      "peakTime": "2017-09-04T22:14Z",
+      "classType": "M2.1"
+    },
+    {
+      "flrID": "2017-09-05T01:04:00-FLR-001",
+      "peakTime": "2017-09-05T01:08Z",
+      "classType": "M4.2"
+    },
+    {
+      "flrID": "2017-09-05T03:42:00-FLR-001",
+      "peakTime": "2017-09-05T03:51Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2017-09-05T04:33:00-FLR-001",
+      "peakTime": "2017-09-05T04:53Z",
+      "classType": "M3.2"
+    },
+    {
+      "flrID": "2017-09-05T06:34:00-FLR-001",
+      "peakTime": "2017-09-05T06:40Z",
+      "classType": "M3.8"
+    },
+    {
+      "flrID": "2017-09-05T17:37:00-FLR-001",
+      "peakTime": "2017-09-05T17:43Z",
+      "classType": "M2.3"
+    },
+    {
+      "flrID": "2017-09-06T08:57:00-FLR-001",
+      "peakTime": "2017-09-06T09:10Z",
+      "classType": "X2.2"
+    },
+    {
+      "flrID": "2017-09-06T11:53:00-FLR-001",
+      "peakTime": "2017-09-06T12:02Z",
+      "classType": "X9.3"
+    },
+    {
+      "flrID": "2017-09-06T15:51:00-FLR-001",
+      "peakTime": "2017-09-06T15:56Z",
+      "classType": "M2.5"
+    },
+    {
+      "flrID": "2017-09-06T19:20:00-FLR-001",
+      "peakTime": "2017-09-06T19:30Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2017-09-06T23:33:00-FLR-001",
+      "peakTime": "2017-09-06T23:39Z",
+      "classType": "M1.2"
+    },
+    {
+      "flrID": "2017-09-07T05:00:00-FLR-001",
+      "peakTime": "2017-09-07T05:02Z",
+      "classType": "M2.4"
+    },
+    {
+      "flrID": "2017-09-07T09:50:00-FLR-001",
+      "peakTime": "2017-09-07T09:54Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2017-09-07T10:11:00-FLR-001",
+      "peakTime": "2017-09-07T10:15Z",
+      "classType": "M7.3"
+    },
+    {
+      "flrID": "2017-09-07T14:20:00-FLR-001",
+      "peakTime": "2017-09-07T14:36Z",
+      "classType": "X1.3"
+    },
+    {
+      "flrID": "2017-09-07T23:51:00-FLR-001",
+      "peakTime": "2017-09-07T23:59Z",
+      "classType": "M3.9"
+    },
+    {
+      "flrID": "2017-09-08T02:19:00-FLR-001",
+      "peakTime": "2017-09-08T02:24Z",
+      "classType": "M1.3"
+    },
+    {
+      "flrID": "2017-09-08T03:39:00-FLR-001",
+      "peakTime": "2017-09-08T03:43Z",
+      "classType": "M1.2"
+    },
+    {
+      "flrID": "2017-09-08T07:40:00-FLR-001",
+      "peakTime": "2017-09-08T07:49Z",
+      "classType": "M8.1"
+    },
+    {
+      "flrID": "2017-09-08T15:09:00-FLR-001",
+      "peakTime": "2017-09-08T15:47Z",
+      "classType": "M3.0"
+    },
+    {
+      "flrID": "2017-09-08T23:34:00-FLR-001",
+      "peakTime": "2017-09-08T23:45Z",
+      "classType": "M2.1"
+    },
+    {
+      "flrID": "2017-09-09T04:14:00-FLR-001",
+      "peakTime": "2017-09-09T04:28Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2017-09-09T10:51:00-FLR-001",
+      "peakTime": "2017-09-09T11:04Z",
+      "classType": "M3.7"
+    },
+    {
+      "flrID": "2017-09-09T22:04:00-FLR-001",
+      "peakTime": "2017-09-09T23:54Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2017-09-10T02:39:00-FLR-001",
+      "peakTime": "2017-09-10T03:09Z",
+      "classType": "C9.0"
+    },
+    {
+      "flrID": "2017-09-10T15:35:00-FLR-001",
+      "peakTime": "2017-09-10T16:06Z",
+      "classType": "X8.2"
+    },
+    {
+      "flrID": "2017-09-11T10:08:00-FLR-001",
+      "peakTime": "2017-09-11T10:10Z",
+      "classType": "B9.8"
+    },
+    {
+      "flrID": "2017-09-12T07:23:00-FLR-001",
+      "peakTime": "2017-09-12T07:29Z",
+      "classType": "C3.0"
+    },
+    {
+      "flrID": "2017-09-12T19:03:00-FLR-001",
+      "peakTime": "2017-09-12T19:20Z",
+      "classType": "C1.6"
+    },
+    {
+      "flrID": "2017-09-13T07:39:00-FLR-001",
+      "peakTime": "2017-09-13T07:48Z",
+      "classType": "B1.4"
+    },
+    {
+      "flrID": "2017-09-20T12:32:00-FLR-001",
+      "peakTime": "2017-09-20T12:43Z",
+      "classType": "B5.4"
+    },
+    {
+      "flrID": "2017-09-20T19:28:00-FLR-001",
+      "peakTime": "2017-09-20T19:32Z",
+      "classType": "B8.4"
+    },
+    {
+      "flrID": "2017-09-26T02:31:00-FLR-001",
+      "peakTime": "2017-09-26T02:34Z",
+      "classType": "C1.8"
+    },
+    {
+      "flrID": "2017-09-27T00:49:00-FLR-001",
+      "peakTime": "2017-09-27T01:00Z",
+      "classType": "C1.7"
+    }
+  ]
+}

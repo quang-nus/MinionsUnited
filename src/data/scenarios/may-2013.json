@@ -1,0 +1,40 @@
+{
+  "id": "may-2013",
+  "name": "Triple Flare",
+  "startDate": "2013-05-01",
+  "endDate": "2013-05-28",
+  "threshold": "X",
+  "fetchedAt": "2026-11-14T07:52:30.181Z",
+  "flares": [
+    {
+      "flrID": "2013-05-03T17:24:00-FLR-001",
+      "peakTime": "2013-05-03T17:32Z",
+      "classType": "M5.7"
+    },
+    {
+      "flrID": "2013-05-13T01:53:00-FLR-001",
+      "peakTime": "2013-05-13T02:17Z",
+      "classType": "X1.6"
+    },
+    {
+      "flrID": "2013-05-13T15:40:00-FLR-001",
+      "peakTime": "2013-05-13T16:05Z",
+      "classType": "X2.8"
+    },
+    {
+      "flrID": "2013-05-14T01:00:00-FLR-001",
+      "peakTime": "2013-05-14T01:11Z",
+      "classType": "X3.2"
+    },
+    {
+      "flrID": "2013-05-15T01:25:00-FLR-001",
+      "peakTime": "2013-05-15T01:48Z",
+      "classType": "X1.2"
+    },
+    {
+      "flrID": "2013-05-22T12:30:00-FLR-001",
+      "peakTime": "2013-05-22T13:38Z",
+      "classType": "M5.0"
+    }
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "id": "february-2023",
+  "name": "Quiet Then Loud",
+  "startDate": "2023-02-01",
+  "endDate": "2023-02-28",
+  "threshold": "X",
+  "fetchedAt": "2026-11-14T07:53:00.784Z",
+  "flares": [
+    {
+      "flrID": "2023-02-05T10:37:00-FLR-001",
+      "peakTime": "2023-02-05T10:51Z",
+      "classType": "C6.4"
+    },
+    {
+      "flrID": "2023-02-06T11:58:00-FLR-001",
+      "peakTime": "2023-02-06T12:12Z",
+      "classType": "C7.8"
+    },
+    {
+      "flrID": "2023-02-07T02:34:00-FLR-001",
+      "peakTime": "2023-02-07T02:42Z",
+      "classType": "C3.0"
+    },
+    {
+      "flrID": "2023-02-07T13:33:00-FLR-001",
+      "peakTime": "2023-02-07T13:53Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2023-02-07T20:01:00-FLR-001",
+      "peakTime": "2023-02-07T20:07Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2023-02-07T21:21:00-FLR-001",
+      "peakTime": "2023-02-07T21:30Z",
+      "classType": "C5.3"
+    },
+    {
+      "flrID": "2023-02-07T22:46:00-FLR-001",
+      "peakTime": "2023-02-07T22:58Z",
+      "classType": "M3.8"
+    },
+    {
+      "flrID": "2023-02-07T23:05:00-FLR-001",
+      "peakTime": "2023-02-07T23:07Z",
+      "classType": "M6.3"
+    },
+    {
+      "flrID": "2023-02-08T02:45:00-FLR-001",
+      "peakTime": "2023-02-08T02:53Z",
+      "classType": "M2.0"
+    },
+    {
+      "flrID": "2023-02-08T15:28:00-FLR-001",
+      "peakTime": "2023-02-08T16:03Z",
+      "classType": "M1.6"
+    },
+    {
+      "flrID": "2023-02-08T19:56:00-FLR-001",
+      "peakTime": "2023-02-08T20:12Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2023-02-08T21:03:00-FLR-001",
+      "peakTime": "2023-02-08T21:13Z",
+      "classType": "M1.7"
+    },
+    {
+      "flrID": "2023-02-08T21:21:00-FLR-001",
+      "peakTime": "2023-02-08T21:37Z",
+      "classType": "M1.7"
+    },
+    {
+      "flrID": "2023-02-09T02:45:00-FLR-001",
+      "peakTime": "2023-02-09T03:10Z",
+      "classType": "M3.1"
+    },
+    {
+      "flrID": "2023-02-09T07:11:00-FLR-001",
+      "peakTime": "2023-02-09T07:17Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2023-02-09T08:49:00-FLR-001",
+      "peakTime": "2023-02-09T09:07Z",
+      "classType": "M2.9"
+    },
+    {
+      "flrID": "2023-02-09T14:44:00-FLR-001",
+      "peakTime": "2023-02-09T14:56Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2023-02-09T15:14:00-FLR-001",
+      "peakTime": "2023-02-09T15:25Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2023-02-09T15:35:00-FLR-001",
+      "peakTime": "2023-02-09T15:38Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2023-02-09T18:18:00-FLR-001",
+      "peakTime": "2023-02-09T18:42Z",
+      "classType": "M1.8"
+    },
+    {
+      "flrID": "2023-02-10T02:45:00-FLR-001",
+      "peakTime": "2023-02-10T03:03Z",
+      "classType": "M3.7"
+    },
+    {
+      "flrID": "2023-02-10T08:02:00-FLR-001",
+      "peakTime": "2023-02-10T08:05Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2023-02-10T14:35:00-FLR-001",
+      "peakTime": "2023-02-10T14:55Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2023-02-10T15:29:00-FLR-001",
+      "peakTime": "2023-02-10T16:01Z",
+      "classType": "M1.6"
+    },
+    {
+      "flrID": "2023-02-10T22:34:00-FLR-001",
+      "peakTime": "2023-02-10T22:41Z",
+      "classType": "M1.2"
+    },
+    {
+      "flrID": "2023-02-11T07:59:00-FLR-001",
+      "peakTime": "2023-02-11T08:08Z",
+      "classType": "M2.2"
+    },
+    {
+      "flrID": "2023-02-11T10:42:00-FLR-001",
+      "peakTime": "2023-02-11T10:58Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2023-02-11T11:29:00-FLR-001",
+      "peakTime": "2023-02-11T11:34Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2023-02-11T12:05:00-FLR-001",
+      "peakTime": "2023-02-11T12:09Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2023-02-11T12:18:00-FLR-001",
+      "peakTime": "2023-02-11T12:23Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2023-02-11T12:28:00-FLR-001",
+      "peakTime": "2023-02-11T12:40Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2023-02-11T15:40:00-FLR-001",
+      "peakTime": "2023-02-11T15:48Z",
+      "classType": "X1.1"
+    },
+    {
+      "flrID": "2023-02-11T17:11:00-FLR-001",
+      "peakTime": "2023-02-11T17:23Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2023-02-12T08:35:00-FLR-001",
+      "peakTime": "2023-02-12T08:48Z",
+      "classType": "M3.1"
+    },
+    {
+      "flrID": "2023-02-12T09:11:00-FLR-001",
+      "peakTime": "2023-02-12T09:27Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2023-02-12T13:23:00-FLR-001",
+      "peakTime": "2023-02-12T13:34Z",
+      "classType": "M1.2"
+    },
+    {
+      "flrID": "2023-02-12T15:33:00-FLR-001",
+      "peakTime": "2023-02-12T15:38Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2023-02-13T05:04:00-FLR-001",
+      "peakTime": "2023-02-13T05:18Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2023-02-13T15:49:00-FLR-001",
+      "peakTime": "2023-02-13T15:56Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2023-02-14T01:57:00-FLR-001",
+      "peakTime": "2023-02-14T02:03Z",
+      "classType": "M1.8"
+    },
+    {
+      "flrID": "2023-02-14T11:59:00-FLR-001",
+      "peakTime": "2023-02-14T12:12Z",
+      "classType": "M2.6"
+    },
+    {
+      "flrID": "2023-02-15T01:08:00-FLR-001",
+      "peakTime": "2023-02-15T01:33Z",
+      "classType": "C5.6"
+    },
+    {
+      "flrID": "2023-02-15T04:33:00-FLR-001",
+      "peakTime": "2023-02-15T04:47Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2023-02-15T05:16:00-FLR-001",
+      "peakTime": "2023-02-15T05:23Z",
+      "classType": "M2.0"
+    },
+    {
+      "flrID": "2023-02-15T06:42:00-FLR-001",
+      "peakTime": "2023-02-15T07:05Z",
+      "classType": "M1.3"
+    },
+    {
+      "flrID": "2023-02-15T21:05:00-FLR-001",
+      "peakTime": "2023-02-15T21:14Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2023-02-16T00:19:00-FLR-001",
+      "peakTime": "2023-02-16T00:32Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2023-02-16T10:16:00-FLR-001",
+      "peakTime": "2023-02-16T10:59Z",
+      "classType": "C9.0"
+    },
+    {
+      "flrID": "2023-02-16T20:39:00-FLR-001",
+      "peakTime": "2023-02-16T21:16Z",
+      "classType": "C9.1"
+    },
+    {
+      "flrID": "2023-02-17T19:38:00-FLR-001",
+      "peakTime": "2023-02-17T20:16Z",
+      "classType": "X2.2"
+    },
+    {
+      "flrID": "2023-02-20T14:47:00-FLR-001",
+      "peakTime": "2023-02-20T14:58Z",
+      "classType": "M4.4"
+    },
+    {
+      "flrID": "2023-02-21T11:05:00-FLR-001",
+      "peakTime": "2023-02-21T11:11Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2023-02-21T11:14:00-FLR-001",
+      "peakTime": "2023-02-21T11:23Z",
+      "classType": "M4.7"
+    },
+    {
+      "flrID": "2023-02-21T19:57:00-FLR-001",
+      "peakTime": "2023-02-21T20:17Z",
+      "classType": "M5.0"
+    },
+    {
+      "flrID": "2023-02-22T04:51:00-FLR-001",
+      "peakTime": "2023-02-22T05:12Z",
+      "classType": "M1.4"
+    },
+    {
+      "flrID": "2023-02-22T13:36:00-FLR-001",
+      "peakTime": "2023-02-22T13:50Z",
+      "classType": "M2.6"
+    },
+    {
+      "flrID": "2023-02-23T06:11:00-FLR-001",
+      "peakTime": "2023-02-23T06:14Z",
+      "classType": "M1.5"
+    },
+    {
+      "flrID": "2023-02-23T08:32:00-FLR-001",
+      "peakTime": "2023-02-23T08:48Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2023-02-23T08:51:00-FLR-001",
+      "peakTime": "2023-02-23T09:01Z",
+      "classType": "M1.2"
+    },
+    {
+      "flrID": "2023-02-24T17:11:00-FLR-001",
+      "peakTime": "2023-02-24T17:15Z",
+      "classType": "M1.1"
+    },
+    {
+      "flrID": "2023-02-24T20:03:00-FLR-001",
+      "peakTime": "2023-02-24T20:30Z",
+      "classType": "M3.7"
+    },
+    {
+      "flrID": "2023-02-25T15:35:00-FLR-001",
+      "peakTime": "2023-02-25T15:40Z",
+      "classType": "M1.0"
+    },
+    {
+      "flrID": "2023-02-25T18:40:00-FLR-001",
+      "peakTime": "2023-02-25T19:44Z",
+      "classType": "M6.3"
+    },
+    {
+      "flrID": "2023-02-28T17:35:00-FLR-001",
+      "peakTime": "2023-02-28T17:50Z",
+      "classType": "M8.6"
+    }
+  ]
+}
