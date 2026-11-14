@@ -175,9 +175,15 @@ describe('resolveExpeditions', () => {
     }
   });
 
-  it('6-sol and 7-sol trips earn 85 to 120 and 135 to 185', () => {
-    expect(rewardRange(6)).toEqual([85, 120]);
-    expect(rewardRange(7)).toEqual([135, 185]);
+  it('the reward table is 60% of the old one, rounded up, for 1 to 7 sols', () => {
+    const old: [number, number][] = [[0, 5], [7, 13], [16, 26], [30, 46], [52, 76], [85, 120], [135, 185]];
+    expect(RESEARCH_REWARD_RANGES).toEqual([[0, 3], [5, 8], [10, 16], [18, 28], [32, 46], [51, 72], [81, 111]]);
+    expect(RESEARCH_REWARD_RANGES).toEqual(old.map(([min, max]) => [Math.ceil(min * 0.6), Math.ceil(max * 0.6)]));
+  });
+
+  it('6-sol and 7-sol trips earn 51 to 72 and 81 to 111', () => {
+    expect(rewardRange(6)).toEqual([51, 72]);
+    expect(rewardRange(7)).toEqual([81, 111]);
     for (let i = 0; i < 2000; i += 1) {
       const base = richGame();
       const state = withCrew(
@@ -185,8 +191,8 @@ describe('resolveExpeditions', () => {
         { 2: { status: 'expedition', solsOutside: 6 } },
       );
       const reward = resolveExpeditions(state).state.research - state.research;
-      expect(reward).toBeGreaterThanOrEqual(135);
-      expect(reward).toBeLessThanOrEqual(185);
+      expect(reward).toBeGreaterThanOrEqual(81);
+      expect(reward).toBeLessThanOrEqual(111);
     }
   });
 
@@ -332,7 +338,9 @@ describe('starsFor', () => {
     };
   }
 
-  it('the higher mark is above the benchmark', () => {
+  it('the marks are 100 and 155, and the higher mark is above the benchmark', () => {
+    expect(STARS_2_RESEARCH).toBe(100);
+    expect(STARS_3_RESEARCH).toBe(155);
     expect(STARS_3_RESEARCH).toBeGreaterThan(STARS_2_RESEARCH);
   });
 

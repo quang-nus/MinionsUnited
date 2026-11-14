@@ -11,8 +11,10 @@ research as you can. Research is your score.
 A won mission earns stars:
 
 - 1 star for finishing.
-- 2 stars for also reaching `STARS_2_RESEARCH` research (120).
-- 3 stars for reaching `STARS_3_RESEARCH` (155) with all four crew still on Mars.
+- 2 stars for also reaching `STARS_2_RESEARCH` research.
+- 3 stars for reaching `STARS_3_RESEARCH` with all four crew still on Mars.
+
+Both marks are in `src/engine/constants.ts`; every screen reads them from there.
 
 A lost mission earns none. During play, three star slots beside the research
 score show which stars are earned, still possible, or out of reach.

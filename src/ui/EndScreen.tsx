@@ -1,5 +1,13 @@
 import { useEffect, useRef } from 'react';
-import { CREW_SIZE, SOLS_TOTAL, STARS_2_RESEARCH, STARS_3_RESEARCH } from '../engine/constants';
+import {
+  CREW_SIZE,
+  DAILY_SHIELDING_USE,
+  FLARE_SHIELDING_USE,
+  LIFE_SUPPORT_NEED_SICK,
+  SOLS_TOTAL,
+  STARS_2_RESEARCH,
+  STARS_3_RESEARCH,
+} from '../engine/constants';
 import { addDays, flaresBySol } from '../engine/flares';
 import { starGoals, starsFor, type StarCount } from '../engine/research';
 import type { GameState, LogEntry, Scenario } from '../engine/types';
@@ -142,7 +150,7 @@ export function EndScreen({ game, scenario, onPlayAgain, onMenu, onAbout }: EndS
                   <LifeSupportIcon size={28} /> Life support ran out.
                 </p>
                 <p className="loss-tip">
-                  Tip: check the life support meter before you end each sol. Sick crew need 2.
+                  Tip: check the life support meter before you end each sol. Sick crew need {LIFE_SUPPORT_NEED_SICK}.
                 </p>
               </div>
             ) : (
@@ -151,7 +159,8 @@ export function EndScreen({ game, scenario, onPlayAgain, onMenu, onAbout }: EndS
                   <ShieldIcon size={28} /> The shields were too weak for a solar flare.
                 </p>
                 <p className="loss-tip">
-                  Tip: shields wear out every night. Call Mission Control, and buy 17 on a flare night.
+                  Tip: shields wear out every night. Call Mission Control, and buy {DAILY_SHIELDING_USE + FLARE_SHIELDING_USE} on a
+                  flare night.
                 </p>
               </div>
             )}
