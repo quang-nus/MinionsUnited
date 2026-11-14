@@ -145,3 +145,40 @@ export function SoundOffIcon(props: IconProps) {
     </Svg>
   );
 }
+
+export function InfoIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="12" cy="12" r="10" fill="currentColor" />
+      <path d="M12 10.5v6.5" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" />
+      <circle cx="12" cy="7" r="1.5" fill="#fff" />
+    </Svg>
+  );
+}
+
+/** A ticked circle: a goal that is done. */
+export function GoalDoneIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="12" cy="12" r="10" fill="currentColor" />
+      <path d="m7.5 12.5 3 3 6-6.5" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </Svg>
+  );
+}
+
+/** An empty circle: a goal not reached yet. */
+export function GoalOpenIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="2.4" />
+    </Svg>
+  );
+}
+
+export function StarIcon(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M12 2.8l2.8 5.8 6.4.8-4.7 4.4 1.2 6.3L12 17l-5.7 3.1 1.2-6.3-4.7-4.4 6.4-.8z" fill="currentColor" />
+    </Svg>
+  );
+}

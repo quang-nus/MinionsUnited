@@ -173,9 +173,81 @@ export function forceReturnAtMissionEnd(state: GameState, researchStreamBeforeSt
 
 // ---------- Rating ----------
 
-/** Stars for a won game: 1, 2 or 3, from the research collected. */
-export function starsFor(research: number): 1 | 2 | 3 {
-  if (research >= STARS_3_RESEARCH) return 3;
-  if (research >= STARS_2_RESEARCH) return 2;
-  return 1;
+/** The three star goals for a finished game. Each goal includes the ones before it. */
+export interface StarGoals {
+  /** 1 star: all sols played with at least one crew member still on Mars. */
+  won: boolean;
+  /** 2 stars: won, with research at or above STARS_2_RESEARCH. */
+  research: boolean;
+  /** 3 stars: won, research at or above STARS_3_RESEARCH, and nobody evacuated (sick still counts). */
+  fullCrew: boolean;
+}
+
+export type StarCount = 0 | 1 | 2 | 3;
+
+/** Which star goals a game has met. A lost or unfinished game meets none. */
+export function starGoals(game: Pick<GameState, 'status' | 'research' | 'crew'>): StarGoals {
+  const won = game.status === 'won';
+  const allOnMars = game.crew.every((m) => m.status !== 'evacuated');
+  return {
+    won,
+    research: won && game.research >= STARS_2_RESEARCH,
+    fullCrew: won && allOnMars && game.research >= STARS_3_RESEARCH,
+  };
+}
+
+/** Stars for a finished game: 0 if lost, otherwise 1 to 3. */
+export function starsFor(game: Pick<GameState, 'status' | 'research' | 'crew'>): StarCount {
+  const goals = starGoals(game);
+  if (goals.fullCrew) return 3;
+  if (goals.research) return 2;
+  if (goals.won) return 1;
+  return 0;
+}
+
+// ---------- Stars during play ----------
+
+/** How one star slot looks: not yet earned, earned, or (star 3 only) no longer possible. */
+export type StarSlotState = 'open' | 'lit' | 'out-of-reach';
+
+export interface StarProgress {
+  /** Star 1: lit only once the mission is won. */
+  finish: 'open' | 'lit';
+  /** Star 2: lit from STARS_2_RESEARCH. Research never goes down, so it is never lost. */
+  research: 'open' | 'lit';
+  /** Star 3: lit from STARS_3_RESEARCH while nobody is evacuated; out of reach for good once anyone is. */
+  fullCrew: StarSlotState;
+}
+
+/**
+ * The state of each star slot at any moment. At the end of a won mission the
+ * number of lit slots equals starsFor(game).
+ */
+export function starProgress(game: Pick<GameState, 'status' | 'research' | 'crew'>): StarProgress {
+  const anyoneEvacuated = game.crew.some((m) => m.status === 'evacuated');
+  return {
+    finish: game.status === 'won' ? 'lit' : 'open',
+    research: game.research >= STARS_2_RESEARCH ? 'lit' : 'open',
+    fullCrew: anyoneEvacuated ? 'out-of-reach' : game.research >= STARS_3_RESEARCH ? 'lit' : 'open',
+  };
+}
+
+/** Number of lit slots. */
+export function litStars(progress: StarProgress): number {
+  return [progress.finish, progress.research, progress.fullCrew].filter((s) => s === 'lit').length;
+}
+
+export interface StarChange {
+  slot: 2 | 3;
+  kind: 'gained' | 'lost' | 'out-of-reach';
+}
+
+/** What changed between two star states. Star 1 is left out: winning ends the game screen. */
+export function starChanges(before: StarProgress, after: StarProgress): StarChange[] {
+  const changes: StarChange[] = [];
+  if (before.research === 'open' && after.research === 'lit') changes.push({ slot: 2, kind: 'gained' });
+  if (before.fullCrew === 'open' && after.fullCrew === 'lit') changes.push({ slot: 3, kind: 'gained' });
+  if (before.fullCrew === 'lit' && after.fullCrew === 'out-of-reach') changes.push({ slot: 3, kind: 'lost' });
+  if (before.fullCrew === 'open' && after.fullCrew === 'out-of-reach') changes.push({ slot: 3, kind: 'out-of-reach' });
+  return changes;
 }

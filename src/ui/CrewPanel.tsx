@@ -15,7 +15,7 @@ function statusWords(member: CrewMember): string {
     case 'sick':
       return 'Sick';
     case 'expedition':
-      return `Exploring, sol ${member.solsOutside + 1}`;
+      return `Exploring, sol\u00a0${member.solsOutside + 1}`; // "sol 7" never splits across lines
     case 'evacuated':
       return 'On the rescue ship';
   }

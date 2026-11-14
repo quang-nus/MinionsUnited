@@ -1,17 +1,15 @@
 import { SoundOffIcon, SoundOnIcon } from './Icons';
 
-/** A mute button. The label stays the same; aria-pressed says whether sound is on. */
+/**
+ * A mute button. Its name is exactly what it shows, "Sound on" or "Sound off",
+ * so screen reader and voice control users hear and say the same words. The
+ * icon also changes, so the state never relies on colour.
+ */
 export function SoundToggle({ on, onChange }: { on: boolean; onChange: (on: boolean) => void }) {
   return (
-    <button
-      type="button"
-      className="sound-toggle"
-      aria-pressed={on}
-      aria-label="Sound effects"
-      onClick={() => onChange(!on)}
-    >
+    <button type="button" className={`sound-toggle${on ? '' : ' is-off'}`} onClick={() => onChange(!on)}>
       {on ? <SoundOnIcon size={24} /> : <SoundOffIcon size={24} />}
-      <span aria-hidden="true">{on ? 'Sound on' : 'Sound off'}</span>
+      <span>{on ? 'Sound on' : 'Sound off'}</span>
     </button>
   );
 }

@@ -175,6 +175,42 @@
   stroke-width: 1;
 }
 
+/* Star goals: an icon and words for each state; colour is only an extra. */
+.star-goals {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  text-align: left;
+  max-width: 34rem;
+}
+
+.goal {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.goal.is-done {
+  font-weight: 700;
+}
+
+.goal.is-done svg {
+  color: var(--research);
+}
+
+.goal.is-open {
+  color: var(--ink-soft);
+}
+
+.goal.is-open svg {
+  color: var(--ink-soft);
+}
+
 .end-score {
   display: flex;
   align-items: center;
@@ -419,4 +455,21 @@
 .start-sound {
   justify-self: end;
   margin: -0.4rem -0.6rem -2.6rem 0;
+}
+
+/* ---------- End screen on short screens: keep Play again in view ---------- */
+
+@media (max-height: 820px) {
+  .end-card {
+    gap: 0.6rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  /* The stars already celebrate a win; the sun icon is decoration. */
+  .end-card.is-won .end-icon {
+    display: none;
+  }
+  .end-card .recap {
+    max-height: 22vh;
+  }
 }

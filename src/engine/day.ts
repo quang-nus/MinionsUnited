@@ -201,6 +201,22 @@ export function shieldingWanted(state: GameState): number {
   return shieldingTonight() + (flareForecastTonight(state) ? FLARE_SHIELDING_USE : 0);
 }
 
+/** Advice on buying shielding: whether the total held after buying is more than tonight can use. */
+export type ShieldingAdvice = 'ok' | 'more-than-tonight' | 'more-than-flare';
+
+/**
+ * Advice only; it never blocks a purchase. Compares the shielding held after
+ * buying `units` with the daily use and with a flare night's total. Only a
+ * forecast for tonight counts, because shielding does not carry over.
+ */
+export function shieldingAdvice(state: GameState, units: number): ShieldingAdvice {
+  const total = state.shielding + units;
+  if (total > shieldingTonight() + FLARE_SHIELDING_USE) return 'more-than-flare';
+  if (flareForecastTonight(state)) return 'ok';
+  if (total > shieldingTonight()) return 'more-than-tonight';
+  return 'ok';
+}
+
 /** Life support is served to healthy crew first, then sick crew, then crew outside. */
 const LIFE_SUPPORT_ORDER: readonly CrewStatus[] = ['base', 'sick', 'expedition'];
 

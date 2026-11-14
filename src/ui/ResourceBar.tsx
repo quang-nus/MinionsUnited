@@ -1,5 +1,7 @@
-import { SOLS_TOTAL } from '../engine/constants';
+import { FLARE_SHIELDING_USE, SOLS_TOTAL } from '../engine/constants';
+import type { StarProgress } from '../engine/research';
 import type { GameState } from '../engine/types';
+import { StarSlots, type StarAnimation } from './StarSlots';
 import { LifeSupportIcon, PowerIcon, ResearchIcon, ShieldIcon, SunIcon, WarningIcon } from './Icons';
 import { flareForecastTonight, lifeSupportTonight, shieldingTonight } from '../engine/day';
 
@@ -49,13 +51,20 @@ function Meter({ kind, label, caption, icon, value, scale, tonight, extraNote }:
             Tonight uses {tonight}. {caption}
           </>
         )}
-        {extraNote && <span className="meter-extra"> {extraNote}</span>}
+        {extraNote && <span className="meter-extra">{extraNote}</span>}
       </div>
     </div>
   );
 }
 
-export function ResourceBar({ game }: { game: GameState }) {
+interface ResourceBarProps {
+  game: GameState;
+  /** Star slots as they should look now (held back until the night's events are shown). */
+  stars: StarProgress;
+  starAnimation: StarAnimation | null;
+}
+
+export function ResourceBar({ game, stars, starAnimation }: ResourceBarProps) {
   const lifeTonight = lifeSupportTonight(game);
   const shieldTonight = shieldingTonight();
 
@@ -96,15 +105,16 @@ export function ResourceBar({ game }: { game: GameState }) {
         value={game.shielding}
         scale={30}
         tonight={shieldTonight}
-        extraNote={flareForecastTonight(game) ? 'A flare may hit tonight: it needs 15 more.' : undefined}
+        extraNote={flareForecastTonight(game) ? `Flare tonight? It needs ${FLARE_SHIELDING_USE} more.` : undefined}
       />
 
       <div className="score-box">
-        <ResearchIcon size={34} />
-        <div>
-          <div className="score-value">{game.research}</div>
-          <div className="score-label">Research: your score</div>
+        <div className="score-line">
+          <ResearchIcon size={24} />
+          <span className="score-value">{game.research}</span>
+          <span className="score-label">research</span>
         </div>
+        <StarSlots progress={stars} animation={starAnimation} />
       </div>
     </section>
   );

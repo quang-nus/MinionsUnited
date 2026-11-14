@@ -4,7 +4,7 @@
 
 export const SOUND_KEY = 'mars-outpost.sound';
 
-export type SoundName = 'endSol' | 'flare' | 'returned' | 'won' | 'lost';
+export type SoundName = 'endSol' | 'flare' | 'returned' | 'won' | 'lost' | 'starGained' | 'starLost';
 
 /** Reads the remembered setting: anything other than 'off' means sound is on. */
 export function parseSoundSetting(text: string | null): boolean {
@@ -73,6 +73,18 @@ const SOUNDS: Record<SoundName, readonly Note[]> = {
   returned: [
     { freq: 660, start: 0, length: 0.16, type: 'triangle', volume: 0.16 },
     { freq: 990, start: 0.14, length: 0.28, type: 'triangle', volume: 0.16 },
+  ],
+  // A quick sparkly run up for a new star.
+  starGained: [
+    { freq: 784, start: 0, length: 0.12, type: 'triangle', volume: 0.14 },
+    { freq: 1047, start: 0.09, length: 0.12, type: 'triangle', volume: 0.14 },
+    { freq: 1319, start: 0.18, length: 0.12, type: 'triangle', volume: 0.14 },
+    { freq: 1568, start: 0.27, length: 0.3, type: 'sine', volume: 0.12 },
+  ],
+  // A soft sliding-down "aww" when a star is lost.
+  starLost: [
+    { freq: 440, slideTo: 330, start: 0, length: 0.35, type: 'sine', volume: 0.13 },
+    { freq: 330, slideTo: 220, start: 0.3, length: 0.45, type: 'sine', volume: 0.12 },
   ],
   won: [
     { freq: 523, start: 0, length: 0.18, type: 'triangle', volume: 0.16 },

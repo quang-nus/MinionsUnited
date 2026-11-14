@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { SOLS_TOTAL } from '../engine/constants';
+import { CREW_SIZE, SOLS_TOTAL, STARS_2_RESEARCH, STARS_3_RESEARCH } from '../engine/constants';
 import { addDays, flaresBySol } from '../engine/flares';
-import { starsFor } from '../engine/research';
+import { starGoals, starsFor, type StarCount } from '../engine/research';
 import type { GameState, LogEntry, Scenario } from '../engine/types';
 import { formatDate, formatPeak } from './format';
-import { FlareIcon, LifeSupportIcon, ResearchIcon, RocketIcon, ShieldIcon, SunIcon } from './Icons';
+import { FlareIcon, GoalDoneIcon, GoalOpenIcon, LifeSupportIcon, ResearchIcon, RocketIcon, ShieldIcon, SunIcon } from './Icons';
 
 interface EndScreenProps {
   game: GameState;
@@ -14,7 +14,7 @@ interface EndScreenProps {
   onAbout: () => void;
 }
 
-function Stars({ count }: { count: 1 | 2 | 3 }) {
+function Stars({ count }: { count: StarCount }) {
   return (
     <div className="stars" role="img" aria-label={`${count} of 3 stars`}>
       {[1, 2, 3].map((n) => (
@@ -23,6 +23,36 @@ function Stars({ count }: { count: 1 | 2 | 3 }) {
         </svg>
       ))}
     </div>
+  );
+}
+
+/**
+ * The three star goals as a checklist. Each goal has an icon and words for
+ * its state, so it never relies on colour; screen readers hear "Done" or
+ * "Not yet" before each goal.
+ */
+function StarGoalList({ game }: { game: GameState }) {
+  const goals = starGoals(game);
+  const rows = [
+    { done: goals.won, text: 'You finished the mission.' },
+    { done: goals.research, text: `You collected ${STARS_2_RESEARCH} research or more.` },
+    {
+      done: goals.fullCrew,
+      text: `All ${CREW_SIZE} crew stayed on Mars and you collected ${STARS_3_RESEARCH} research or more.`,
+    },
+  ];
+  return (
+    <ul className="star-goals" aria-label="How to earn stars">
+      {rows.map((row) => (
+        <li key={row.text} className={row.done ? 'goal is-done' : 'goal is-open'}>
+          {row.done ? <GoalDoneIcon size={24} /> : <GoalOpenIcon size={24} />}
+          <span>
+            <span className="visually-hidden">{row.done ? 'Done: ' : 'Not yet: '}</span>
+            {row.text}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -88,7 +118,8 @@ export function EndScreen({ game, scenario, onPlayAgain, onMenu, onAbout }: EndS
               <SunIcon size={56} />
             </div>
             <h1 className="screen-title">Mission complete!</h1>
-            <Stars count={starsFor(game.research)} />
+            <Stars count={starsFor(game)} />
+            <StarGoalList game={game} />
             <p className="end-score">
               <ResearchIcon size={30} /> You collected <strong>{game.research}</strong> research.
             </p>

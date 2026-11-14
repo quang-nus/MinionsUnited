@@ -12,6 +12,7 @@ export const GUIDE_STEPS: readonly GuideStep[] = [
   { target: '.action-life', title: 'Life support', text: 'Buy life support. Your crew needs air, water and food.' },
   { target: '.action-shield', title: 'Shielding', text: 'Buy shielding every sol to block space radiation.' },
   { target: '.action-research', title: 'Research', text: 'Send someone exploring. Research is your score!' },
+  { target: '.star-slots', title: 'Stars', text: 'Finish for 1 star. Research and a full crew earn more.' },
   { target: '.action-comms', title: 'Mission Control', text: 'Call Mission Control to hear when a flare is coming.' },
   { target: '.crew-panel', title: 'Your crew', text: 'This is your crew. Keep them all safe!' },
   { target: '.end-sol', title: 'End the sol', text: 'Done for the day? End the sol and see what happens.' },

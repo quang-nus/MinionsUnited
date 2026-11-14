@@ -51,17 +51,20 @@ export const FLARE_EVACUATIONS_UNSHIELDED = 2; // crew at the base sent away by 
 // (Life support still carries over.)
 
 // ---- Expeditions ----
-export const RETURN_BASE_PERCENT = 50;
-export const RETURN_PER_SOL_OUTSIDE_PERCENT = 10; // chance = 50 + 10 x solsOutside
+export const RETURN_BASE_PERCENT = 30;
+export const RETURN_PER_SOL_OUTSIDE_PERCENT = 10; // chance = 30 + 10 x solsOutside: 40% on sol 1, 100% on sol 7
 export const RETURN_SICKNESS_BASE_PERCENT = 5;
-export const RETURN_SICKNESS_PER_SOL_OUTSIDE_PERCENT = 10; // chance = 5 + 10 x solsOutside
-// Research reward range by solsOutside: index 0 is 1 sol outside, index 4 is 5 sols.
+export const RETURN_SICKNESS_PER_SOL_OUTSIDE_PERCENT = 10; // chance = 5 + 10 x solsOutside: 65% after 6 sols, 75% after 7
+// Research reward range by solsOutside: index 0 is 1 sol outside, index 6 is 7 sols.
+// A trip can last at most 7 sols, because the return chance reaches 100% on sol 7.
 export const RESEARCH_REWARD_RANGES: readonly (readonly [min: number, max: number])[] = [
   [0, 5],
   [7, 13],
   [16, 26],
   [30, 46],
   [52, 76],
+  [85, 120],
+  [135, 185],
 ];
 
 // ---- Sickness ----
@@ -96,7 +99,8 @@ export const FLARE_THRESHOLD_MIN_CLASS: Readonly<Record<'X' | 'M5' | 'M1', strin
 };
 export const MAX_FLARE_SOLS_BEFORE_WARNING = 5; // fetch script warns above this
 
-// ---- End screen rating (set in Step 10c from scripts/simulate.ts; see README) ----
-// A won game earns 1 star, 2 stars from STARS_2_RESEARCH, 3 stars from STARS_3_RESEARCH.
-export const STARS_2_RESEARCH = 100;
-export const STARS_3_RESEARCH = 120;
+// ---- End screen rating (set from scripts/simulate.ts after the longer-trips fix; see README) ----
+// A won game earns 1 star; 2 stars with research at or above STARS_2_RESEARCH;
+// 3 stars with research at or above STARS_3_RESEARCH and no crew member evacuated.
+export const STARS_2_RESEARCH = 120;
+export const STARS_3_RESEARCH = 155;

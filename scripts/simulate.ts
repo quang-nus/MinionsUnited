@@ -1,5 +1,6 @@
 // Balance simulator: plays complete games through the engine with simple
 // automatic strategies, for every scenario file, across many derived seeds.
+// "2+ stars" counts games that earned 2 or 3 stars; "3 stars" counts 3 only.
 //
 // Usage:
 //   npx tsx scripts/simulate.ts                 (all files in src/data/scenarios, 1000 seeds each)
@@ -23,6 +24,7 @@ import {
 } from '../src/engine/constants';
 import { endSol, flareForecastTonight, lifeSupportTonight, startGame } from '../src/engine/day';
 import { flareSols, seedFor } from '../src/engine/flares';
+import { starsFor } from '../src/engine/research';
 import type { ActionResult, GameState, Scenario } from '../src/engine/types';
 
 const DEFAULT_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'data', 'scenarios');
@@ -175,8 +177,9 @@ interface Totals {
   crewLeft: number;
   powerLeft: number;
   scores: number[];
-  /** Research for won games, 0 for lost ones (lost games earn no stars). */
-  starScores: number[];
+  /** Games that earned 2 or 3 stars, and games that earned 3. */
+  twoStars: number;
+  threeStars: number;
 }
 
 function addGame(t: Totals, game: GameState): void {
@@ -186,10 +189,12 @@ function addGame(t: Totals, game: GameState): void {
   t.crewLeft += game.crew.filter((m) => m.status !== 'evacuated').length;
   t.powerLeft += game.power;
   t.scores.push(game.research);
-  t.starScores.push(game.status === 'won' ? game.research : 0);
+  const stars = starsFor(game);
+  t.twoStars += stars >= 2 ? 1 : 0;
+  t.threeStars += stars === 3 ? 1 : 0;
 }
 
-const empty = (): Totals => ({ games: 0, wins: 0, research: 0, crewLeft: 0, powerLeft: 0, scores: [], starScores: [] });
+const empty = (): Totals => ({ games: 0, wins: 0, research: 0, crewLeft: 0, powerLeft: 0, scores: [], twoStars: 0, threeStars: 0 });
 
 function median(values: readonly number[]): number {
   if (values.length === 0) return 0;
@@ -198,15 +203,6 @@ function median(values: readonly number[]): number {
   return sorted.length % 2 === 1 ? (sorted[mid] ?? 0) : ((sorted[mid - 1] ?? 0) + (sorted[mid] ?? 0)) / 2;
 }
 
-/** The value that `share` of games reach or beat (0.2 = the top fifth). */
-function topShare(values: readonly number[], share: number): number {
-  if (values.length === 0) return 0;
-  const sorted = [...values].sort((a, b) => b - a);
-  return sorted[Math.max(0, Math.ceil(sorted.length * share) - 1)] ?? 0;
-}
-
-const STAR_SHARE = 0.2; // the 3-star threshold should be reached in about one mission in five
-
 // ---------- Output ----------
 
 function row(cells: readonly string[], widths: readonly number[]): string {
@@ -214,9 +210,9 @@ function row(cells: readonly string[], widths: readonly number[]): string {
 }
 
 function printTable(title: string, rows: { label: string; t: Totals }[]): void {
-  const widths = [16, 9, 13, 16, 15, 9, 10];
+  const widths = [16, 9, 13, 16, 9, 8, 9, 10];
   console.log(`\n${title}`);
-  console.log(row(['Strategy', 'Win rate', 'Avg research', 'Median research', 'Top 20% (won)', 'Avg crew', 'Avg power'], widths));
+  console.log(row(['Strategy', 'Win rate', 'Avg research', 'Median research', '2+ stars', '3 stars', 'Avg crew', 'Avg power'], widths));
   console.log(row(widths.map((w) => '-'.repeat(w)), widths));
   for (const { label, t } of rows) {
     const n = Math.max(1, t.games);
@@ -227,7 +223,8 @@ function printTable(title: string, rows: { label: string; t: Totals }[]): void {
           `${((100 * t.wins) / n).toFixed(1)}%`,
           (t.research / n).toFixed(1),
           median(t.scores).toFixed(0),
-          topShare(t.starScores, STAR_SHARE).toFixed(0),
+          `${((100 * t.twoStars) / n).toFixed(1)}%`,
+          `${((100 * t.threeStars) / n).toFixed(1)}%`,
           (t.crewLeft / n).toFixed(2),
           (t.powerLeft / n).toFixed(0),
         ],

@@ -27,7 +27,7 @@
 
   font-family: ui-rounded, 'SF Pro Rounded', 'Arial Rounded MT Bold', 'Nunito', 'Trebuchet MS', system-ui, sans-serif;
   /* Large text that still fits: follows both the width and the height of the screen. */
-  font-size: clamp(13px, min(1.35vw, 2.34vh), 18px);
+  font-size: clamp(13px, min(1.35vw, 2.2vh), 18px);
   line-height: 1.3;
   color: var(--ink);
 }
@@ -78,12 +78,14 @@ p {
 /* ---------- Page grid ---------- */
 
 .game {
-  height: 100vh;
-  height: 100dvh;
+  /* At least one screen tall. If the content needs more (long names, a flare
+     warning, large text), the page scrolls instead of letting tiles overlap. */
+  min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr) auto;
-  gap: 0.6rem;
-  padding: 0.7rem 1rem 0.5rem;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem 0.5rem;
   max-width: 1500px;
   margin: 0 auto;
 }
@@ -115,18 +117,16 @@ p {
   display: grid;
   grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
   gap: 0.7rem;
-  min-height: 0;
 }
 
 .left,
 .right {
   display: grid;
-  gap: 0.7rem;
-  min-height: 0;
+  gap: 0.5rem;
 }
 
 .left {
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
 }
 
 .right {
@@ -225,8 +225,9 @@ p {
   margin-top: 0.15rem;
 }
 
-.score-box svg {
+.score-line svg {
   color: var(--research);
+  align-self: center;
 }
 
 .score-value {
@@ -309,6 +310,7 @@ p {
 }
 
 .meter-extra {
+  display: block;
   color: var(--short);
   font-weight: 700;
 }
@@ -421,15 +423,15 @@ p {
 
 .action-panel {
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
 }
 
+/* Rows never shrink below their content, so a Buy button can never spill out of its tile. */
 .action-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 0.6rem;
-  min-height: 0;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.5rem;
 }
 
 .action {
@@ -440,7 +442,6 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  min-height: 0;
   --tone: var(--ink);
 }
 
@@ -632,6 +633,14 @@ p {
 .event-log {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
+  /* The log takes whatever height is left in its column and scrolls inside;
+     its own length never makes the page taller. */
+  contain: size;
+}
+
+.action-panel,
+.crew-panel {
+  min-height: auto;
 }
 
 .log-scroll {
@@ -834,6 +843,277 @@ p {
   padding: 2rem;
 }
 
+/* ---------- Shielding advice (replaces the tile sentence, so the tile never grows) ---------- */
+
+.advice-live:empty {
+  display: none;
+}
+
+.shield-advice {
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.shield-advice svg {
+  vertical-align: -3px;
+}
+
+.shield-advice.is-strong {
+  color: var(--short);
+}
+
+.shield-advice.is-gentle {
+  color: var(--shield);
+}
+
+/* ---------- Score box with star slots ---------- */
+
+.resource-bar .score-box {
+  position: relative; /* the star tip and message sit just under this box */
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 0.1rem;
+  padding: 0.35rem 0.6rem;
+}
+
+.score-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.score-line .score-label {
+  margin-top: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--research);
+}
+
+.star-slots {
+  display: flex;
+}
+
+.star-slot {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 12px;
+  background: none;
+  display: grid;
+  place-items: center;
+}
+
+.star-slot:hover {
+  background: #f6ead9;
+}
+
+.star-path.is-open {
+  fill: #fff;
+  stroke: var(--ink-soft);
+  stroke-width: 1.6;
+}
+
+.star-path.is-lit {
+  fill: var(--power);
+  stroke: #9a6c00;
+  stroke-width: 1.3;
+}
+
+.star-path.is-out-of-reach {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 1.5;
+}
+
+.star-slash {
+  stroke: var(--ink-soft);
+  stroke-width: 2.2;
+}
+
+/* A gained star glows (no movement needed, so this also shows with reduce motion). */
+.star-slot.anim-gained {
+  box-shadow: 0 0 0 3px var(--power);
+}
+
+.sparkles,
+.star-ghost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+}
+
+.sparkle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px;
+  border-radius: 50%;
+  background: var(--power);
+  opacity: 0;
+}
+
+.sparkle-1 { --dx: 0px; --dy: -24px; }
+.sparkle-2 { --dx: 21px; --dy: -12px; }
+.sparkle-3 { --dx: 21px; --dy: 12px; }
+.sparkle-4 { --dx: 0px; --dy: 24px; }
+.sparkle-5 { --dx: -21px; --dy: 12px; }
+.sparkle-6 { --dx: -21px; --dy: -12px; }
+
+.star-tip,
+.star-toast {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 15;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.star-tip {
+  left: 0;
+  padding: 0.45rem 0.6rem;
+  background: var(--ink);
+  color: #fff;
+}
+
+.star-tip em {
+  display: block;
+  font-style: normal;
+  font-weight: 700;
+  margin-top: 0.15rem;
+}
+
+.star-toast {
+  width: max(100%, 15rem);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 0.55rem 0.7rem;
+  border: 3px solid var(--power);
+  background: var(--panel);
+  color: var(--ink);
+  font-weight: 700;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(59, 31, 43, 0.25);
+}
+
+.star-toast svg {
+  flex: none;
+  color: var(--power);
+}
+
+.star-toast.is-loss,
+.star-toast.is-quiet {
+  border-color: var(--ink-soft);
+}
+
+.star-toast.is-loss svg,
+.star-toast.is-quiet svg {
+  color: var(--ink-soft);
+}
+
+.star-toast.is-quiet {
+  font-weight: 600;
+}
+
+.star-toast-line {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .star-slot.anim-gained .star-shape {
+    animation: star-pop 0.7s cubic-bezier(0.3, 1.6, 0.5, 1);
+  }
+  .sparkle {
+    animation: sparkle 0.9s ease-out 0.1s forwards;
+  }
+  .star-ghost {
+    animation: star-drop 1.1s ease-in forwards;
+  }
+  .star-slot.anim-out-of-reach .star-shape {
+    animation: star-fade 0.9s ease-out;
+  }
+  .star-toast {
+    animation: toast-in 0.3s ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The star still changes and the message still shows; nothing moves. */
+  .sparkles,
+  .star-ghost {
+    display: none;
+  }
+}
+
+@keyframes star-pop {
+  0% {
+    transform: scale(0.3) rotate(-25deg);
+  }
+  60% {
+    transform: scale(1.4) rotate(8deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) scale(0.4);
+  }
+}
+
+@keyframes star-drop {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+  30% {
+    opacity: 0.8;
+    transform: translateY(-3px) rotate(-6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(22px) rotate(30deg);
+  }
+}
+
+@keyframes star-fade {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ---------- Sound button ---------- */
 
 .sound-toggle {
@@ -851,7 +1131,7 @@ p {
   font-size: 0.9rem;
 }
 
-.sound-toggle[aria-pressed='false'] {
+.sound-toggle.is-off {
   color: var(--ink-soft);
 }
 
@@ -1103,7 +1383,18 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .event-log {
+    contain: none;
     max-height: 18rem;
+  }
+  /* The page scrolls here, so the stars may be out of view when a sol ends:
+     the star message is pinned to the top of the screen instead. */
+  .star-toast {
+    position: fixed;
+    top: 0.8rem;
+    left: 50%;
+    right: auto;
+    translate: -50% 0;
+    width: min(24rem, calc(100vw - 2rem));
   }
 }
 

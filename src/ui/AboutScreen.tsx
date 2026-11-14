@@ -6,6 +6,11 @@ import {
   FLARE_SHIELDING_USE,
   FLARE_THRESHOLD_MIN_CLASS,
   MIN_FLARE_SOLS_PER_SCENARIO,
+  RESEARCH_REWARD_RANGES,
+  RETURN_BASE_PERCENT,
+  RETURN_PER_SOL_OUTSIDE_PERCENT,
+  RETURN_SICKNESS_BASE_PERCENT,
+  RETURN_SICKNESS_PER_SOL_OUTSIDE_PERCENT,
   SOLS_TOTAL,
 } from '../engine/constants';
 import { flareSols, isReadableFlare } from '../engine/flares';
@@ -17,6 +22,13 @@ const THRESHOLD_WORDS: Record<FlareThreshold, string> = {
   M5: `${FLARE_THRESHOLD_MIN_CLASS.M5} and stronger, including every X-class flare`,
   M1: `${FLARE_THRESHOLD_MIN_CLASS.M1} and stronger, including every X-class flare`,
 };
+
+// Research trips, worked out from the constants so this page never goes out of date.
+const LONGEST_TRIP = Math.ceil((100 - RETURN_BASE_PERCENT) / RETURN_PER_SOL_OUTSIDE_PERCENT);
+const FIRST_SOL_RETURN = RETURN_BASE_PERCENT + RETURN_PER_SOL_OUTSIDE_PERCENT;
+const SHORTEST_REWARD = RESEARCH_REWARD_RANGES[0] ?? [0, 0];
+const LONGEST_REWARD = RESEARCH_REWARD_RANGES[RESEARCH_REWARD_RANGES.length - 1] ?? [0, 0];
+const LONGEST_SICKNESS = RETURN_SICKNESS_BASE_PERCENT + RETURN_SICKNESS_PER_SOL_OUTSIDE_PERCENT * LONGEST_TRIP;
 
 export function AboutScreen({ scenarios, onBack }: { scenarios: readonly Scenario[]; onBack: () => void }) {
   return (
@@ -103,6 +115,16 @@ export function AboutScreen({ scenarios, onBack }: { scenarios: readonly Scenari
           {COMMS_POWER_COST} power and covers the next {COMMS_FORECAST_SOLS} sols, so calling every sol is
           possible but leaves little power for exploring. That trade-off is the lesson of the game: no choice is
           free.
+        </p>
+
+        <h2>How research trips work</h2>
+        <p>
+          A crew member sent exploring cannot be called back. Each night they have a {FIRST_SOL_RETURN}% chance of
+          coming home on the first sol, rising {RETURN_PER_SOL_OUTSIDE_PERCENT} points each sol, so a trip lasts at
+          most {LONGEST_TRIP} sols. Longer trips find more: {SHORTEST_REWARD[0]} to {SHORTEST_REWARD[1]} research
+          after one sol, {LONGEST_REWARD[0]} to {LONGEST_REWARD[1]} after {LONGEST_TRIP}. They also cost more life
+          support and are more likely to end with the explorer sick, up to {LONGEST_SICKNESS}% after{' '}
+          {LONGEST_TRIP} sols. A solar flare sends everyone outside home at once, sick and without their research.
         </p>
 
         <h2>What the game simplifies</h2>

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { buyLifeSupport, buyShielding, launchResearch, requestComms } from '../engine/actions';
 import {
   COMMS_POWER_COST,
+  DAILY_SHIELDING_USE,
+  FLARE_SHIELDING_USE,
   LIFE_SUPPORT_POWER_COST,
   RESEARCH_LAUNCH_LIFE_SUPPORT_COST,
   SHIELDING_POWER_COST,
@@ -9,8 +11,8 @@ import {
 import type { GameState } from '../engine/types';
 import type { GameStore } from '../store';
 import { Face } from './Face';
-import { CommsIcon, LifeSupportIcon, ResearchIcon, ShieldIcon, WarningIcon } from './Icons';
-import { lifeSupportTonight, shieldingWanted } from '../engine/day';
+import { CommsIcon, InfoIcon, LifeSupportIcon, ResearchIcon, ShieldIcon, WarningIcon } from './Icons';
+import { lifeSupportTonight, shieldingAdvice, shieldingWanted, type ShieldingAdvice } from '../engine/day';
 
 const MAX_STEP = 99;
 
@@ -89,6 +91,7 @@ function ExplorerPicker({
           <ResearchIcon size={28} /> Who should go exploring?
         </h2>
         <p>You can't call them back. They return when they are ready.</p>
+        <p>The longer they stay, the more they find.</p>
         <div className="pick-list">
           {choices.map((choice, i) => (
             <button
@@ -110,6 +113,43 @@ function ExplorerPicker({
         </div>
       </div>
     </div>
+  );
+}
+
+/** The words for each piece of shielding advice. The engine decides which one applies. */
+function shieldingAdviceText(advice: ShieldingAdvice): string | null {
+  switch (advice) {
+    case 'more-than-flare':
+      return `Too many! Even a flare night uses only ${DAILY_SHIELDING_USE + FLARE_SHIELDING_USE}. The rest wears out by morning.`;
+    case 'more-than-tonight':
+      return `Tonight uses only ${DAILY_SHIELDING_USE}. More helps only if a flare hits tonight. The rest wears out by morning.`;
+    case 'ok':
+      return null;
+  }
+}
+
+/**
+ * The shielding tile's sentence. An action error comes first; then any advice
+ * about buying more than tonight can use; otherwise the usual sentence. The
+ * advice sits in a polite live region that is always on the page, so screen
+ * readers hear it when it appears or changes without being interrupted.
+ */
+function ShieldingText({ error, advice }: { error: string | undefined; advice: ShieldingAdvice }) {
+  const words = error === undefined ? shieldingAdviceText(advice) : null;
+  const strong = advice === 'more-than-flare';
+  return (
+    <>
+      <div className="advice-live" aria-live="polite">
+        {words !== null && (
+          <p className={`action-text shield-advice ${strong ? 'is-strong' : 'is-gentle'}`}>
+            {strong ? <WarningIcon size={16} /> : <InfoIcon size={16} />} {words}
+          </p>
+        )}
+      </div>
+      {words === null && (
+        <ActionText error={error}>Shields block radiation for one night only.</ActionText>
+      )}
+    </>
   );
 }
 
@@ -181,7 +221,7 @@ export function ActionPanel({ game, store }: { game: GameState; store: GameStore
             <h3>Shielding</h3>
             <span className="action-cost">{SHIELDING_POWER_COST} power each</span>
           </div>
-          <ActionText error={shieldError}>Shields block radiation for one night only.</ActionText>
+          <ShieldingText error={shieldError} advice={shieldingAdvice(game, shieldQty)} />
           <div className="action-row">
             <Stepper label="shielding" value={shieldQty} onChange={setShieldQty} />
             <button

@@ -6,8 +6,16 @@ You run a Mars base with four astronauts for 28 sols (Mars days). Each sol you
 spend power on life support, shielding, research trips and calls to Mission
 Control. Solar flares hit on the days real flares happened, taken from NASA's
 archived space-weather records. Keep the crew on Mars and collect as much
-research as you can. Research is your score, and a won mission earns 1 to 3
-stars.
+research as you can. Research is your score.
+
+A won mission earns stars:
+
+- 1 star for finishing.
+- 2 stars for also reaching `STARS_2_RESEARCH` research (120).
+- 3 stars for reaching `STARS_3_RESEARCH` (155) with all four crew still on Mars.
+
+A lost mission earns none. During play, three star slots beside the research
+score show which stars are earned, still possible, or out of reach.
 
 Nobody is ever hurt in the game: if things go wrong, crew members are
 evacuated to the rescue ship.
